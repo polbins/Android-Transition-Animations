@@ -1,5 +1,6 @@
 package com.example.polbins.rowprototype;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -15,6 +16,10 @@ import android.view.MenuItem;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+    private View mOffersView;
+    private View mChallengesView;
+    private View mRewardsView;
+    private View mNewsfeedView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +36,24 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        mOffersView = findViewById(R.id.offers_view);
+        mChallengesView = findViewById(R.id.challenges_view);
+        mRewardsView = findViewById(R.id.rewards_view);
+        mNewsfeedView = findViewById(R.id.newsfeed_view);
+
+        mOffersView.setOnClickListener(mModulesClickListener);
+        mChallengesView.setOnClickListener(mModulesClickListener);
+        mRewardsView.setOnClickListener(mModulesClickListener);
+        mNewsfeedView.setOnClickListener(mModulesClickListener);
     }
+
+    private View.OnClickListener mModulesClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+//            startActivity(new Intent(getApplicationContext(), Activity.class));
+        }
+    };
 
     @Override
     public void onBackPressed() {
