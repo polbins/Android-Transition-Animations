@@ -67,7 +67,7 @@ public class ListActivity extends AppCompatActivity {
         transition.addListener(new Transition.TransitionListener() {
             @Override
             public void onTransitionEnd(Transition transition) {
-//                animateRevealShow(mRecyclerView);
+                animateRevealShow(mRecyclerView);
 //                animateItemsIn();
             }
 
@@ -87,10 +87,6 @@ public class ListActivity extends AppCompatActivity {
             public void onTransitionResume(Transition transition) {
             }
         });
-    }
-
-    private void animateItemsIn() {
-
     }
 
     private void animateRevealShow(View viewRoot) {
@@ -127,7 +123,13 @@ public class ListActivity extends AppCompatActivity {
 
         @Override
         public void onBindViewHolder(ListViewHolder holder, int position) {
-            holder.mTextView.setText(mModuleName + " " + (position + 1));
+            if (position % 2 == 0) {
+                holder.container.setBackgroundColor(getResources().getColor(android.R.color.darker_gray));
+            } else {
+                holder.container.setBackgroundColor(getResources().getColor(android.R.color.tertiary_text_light));
+            }
+            holder.mHeadingTextView.setText(mModuleName + " Heading " + (position + 1) + "\nSome other Text Here");
+            holder.mSubheadingTextView.setText(mModuleName + " Subheading " + (position + 1));
         }
 
         @Override
@@ -136,11 +138,15 @@ public class ListActivity extends AppCompatActivity {
         }
 
         class ListViewHolder extends RecyclerView.ViewHolder {
-            TextView mTextView;
+            View container;
+            TextView mHeadingTextView;
+            TextView mSubheadingTextView;
 
             public ListViewHolder(View itemView) {
                 super(itemView);
-                mTextView = (TextView) itemView.findViewById(R.id.text_view);
+                container = itemView;
+                mHeadingTextView = (TextView) itemView.findViewById(R.id.heading_text_view);
+                mSubheadingTextView = (TextView) itemView.findViewById(R.id.subheading_text_view);
             }
 
         }
