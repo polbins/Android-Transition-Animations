@@ -1,9 +1,14 @@
 package com.example.polbins.rowprototype;
 
+import android.annotation.TargetApi;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityOptionsCompat;
+import android.transition.Fade;
+import android.transition.Slide;
+import android.view.Gravity;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -46,12 +51,59 @@ public class MainActivity extends AppCompatActivity
         mChallengesView.setOnClickListener(mModulesClickListener);
         mRewardsView.setOnClickListener(mModulesClickListener);
         mNewsfeedView.setOnClickListener(mModulesClickListener);
+
+        setupWindowAnimations();
+    }
+
+    private void setupWindowAnimations() {
+        Slide slideTransition = new Slide();
+        slideTransition.setSlideEdge(Gravity.LEFT);
+        slideTransition.setDuration(getResources().getInteger(R.integer.anim_duration_long));
+        getWindow().setReenterTransition(slideTransition);
+        getWindow().setExitTransition(slideTransition);
+//        // Re-enter transition is executed when returning to this activity
+//        Slide slideTransition = new Slide();
+//        slideTransition.setSlideEdge(Gravity.CENTER);
+//        slideTransition.setDuration(getResources().getInteger(R.integer.anim_duration_long));
+//        getWindow().setExitTransition(slideTransition);
+//
+//        Fade fadeTransition = new Fade();
+//        fadeTransition.setDuration(getResources().getInteger(R.integer.anim_duration_long));
+//        getWindow().setReenterTransition(fadeTransition);
     }
 
     private View.OnClickListener mModulesClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-//            startActivity(new Intent(getApplicationContext(), Activity.class));
+            Intent i = new Intent(getApplicationContext(), ListActivity.class);
+            String moduleTitle = "";
+            int colorResourceId = 0;
+
+            switch (v.getId()) {
+                case R.id.offers_view:
+                    moduleTitle = getString(R.string.offers);
+                    colorResourceId = android.R.color.holo_blue_dark;
+                    break;
+                case R.id.challenges_view:
+                    moduleTitle = getString(R.string.challenges);
+                    colorResourceId = android.R.color.holo_green_light;
+                    break;
+                case R.id.rewards_view:
+                    moduleTitle = getString(R.string.rewards);
+                    colorResourceId = android.R.color.holo_orange_dark;
+                    break;
+                case R.id.newsfeed_view:
+                    moduleTitle = getString(R.string.newsfeed);
+                    colorResourceId = android.R.color.holo_red_light;
+                    break;
+            }
+            if (!moduleTitle.isEmpty()) {
+                ActivityOptionsCompat transitionActivityOptions =
+                        ActivityOptionsCompat.makeSceneTransitionAnimation(MainActivity.this, v, getString(R.string.transition_list));
+                i.putExtra(ListActivity.LIST_ACTIVITY_TITLE, moduleTitle);
+                i.putExtra(ListActivity.LIST_ACTIVITY_COLOR, colorResourceId);
+                startActivity(i, transitionActivityOptions.toBundle());
+            }
         }
     };
 
@@ -65,7 +117,6 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
