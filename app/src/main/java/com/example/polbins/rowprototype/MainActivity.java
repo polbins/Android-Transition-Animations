@@ -3,6 +3,7 @@ package com.example.polbins.rowprototype;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -24,6 +25,8 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        setupWindowAnimations();
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -47,14 +50,15 @@ public class MainActivity extends AppCompatActivity
         mChallengesView.setOnClickListener(mModulesClickListener);
         mRewardsView.setOnClickListener(mModulesClickListener);
         mNewsfeedView.setOnClickListener(mModulesClickListener);
-
-        setupWindowAnimations();
     }
 
     private void setupWindowAnimations() {
         Slide slideTransition = new Slide();
         slideTransition.setSlideEdge(Gravity.LEFT);
         slideTransition.setDuration(getResources().getInteger(R.integer.anim_duration_long));
+//        Fade fade = new Fade();
+//        fade.setDuration(1000);
+//        getWindow().setEnterTransition(fade);
         getWindow().setReenterTransition(slideTransition);
         getWindow().setExitTransition(slideTransition);
 //        // Re-enter transition is executed when returning to this activity
@@ -74,32 +78,37 @@ public class MainActivity extends AppCompatActivity
             Intent i = new Intent(getApplicationContext(), ListActivity.class);
             String moduleTitle = "";
             int colorResourceId = 0;
+            View sharedElementView = null;
 
             switch (v.getId()) {
                 case R.id.offers_view:
                     moduleTitle = getString(R.string.offers);
                     colorResourceId = android.R.color.holo_blue_dark;
+                    sharedElementView = findViewById(R.id.offers_text_view);
                     break;
                 case R.id.challenges_view:
                     moduleTitle = getString(R.string.challenges);
                     colorResourceId = android.R.color.holo_green_light;
+                    sharedElementView = findViewById(R.id.challenges_text_view);
                     break;
                 case R.id.rewards_view:
                     moduleTitle = getString(R.string.rewards);
                     colorResourceId = android.R.color.holo_orange_dark;
+                    sharedElementView = findViewById(R.id.rewards_text_view);
                     break;
                 case R.id.newsfeed_view:
                     moduleTitle = getString(R.string.newsfeed);
                     colorResourceId = android.R.color.holo_red_light;
+                    sharedElementView = findViewById(R.id.newsfeed_text_view);
                     break;
             }
             if (!moduleTitle.isEmpty()) {
-//                ActivityOptionsCompat transitionActivityOptions =
-//                        ActivityOptionsCompat.makeSceneTransitionAnimation(MainActivity.this, v, getString(R.string.transition_list));
+                ActivityOptionsCompat transitionActivityOptions =
+                        ActivityOptionsCompat.makeSceneTransitionAnimation(MainActivity.this, sharedElementView, getString(R.string.transition_list));
                 i.putExtra(ListActivity.LIST_ACTIVITY_TITLE, moduleTitle);
                 i.putExtra(ListActivity.LIST_ACTIVITY_COLOR, colorResourceId);
-//                startActivity(i, transitionActivityOptions.toBundle());
-                startActivity(i);
+                startActivity(i, transitionActivityOptions.toBundle());
+//                startActivity(i);
             }
         }
     };

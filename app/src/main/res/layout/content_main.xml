@@ -1,98 +1,102 @@
 <?xml version="2.0" encoding="utf-8"?>
 <android.support.percent.PercentRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+                                               xmlns:app="http://schemas.android.com/apk/res-auto"
+                                               android:layout_width="match_parent"
+                                               android:layout_height="match_parent">
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:background="@android:color/holo_blue_dark"
-        app:layout_heightPercent="25%" />
-
-    <TextView
+    <FrameLayout
         android:id="@+id/offers_view"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_alignParentTop="true"
         android:background="?attr/selectableItemBackground"
         android:clickable="true"
-        android:gravity="center"
-        android:text="@string/offers"
-        android:textAlignment="gravity"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large.Inverse"
-        app:layout_heightPercent="25%" />
+        app:layout_heightPercent="25%">
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_below="@id/offers_view"
-        android:background="@android:color/holo_green_light"
-        app:layout_heightPercent="25%" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/holo_blue_dark"/>
 
-    <TextView
+        <TextView
+            android:id="@+id/offers_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/offers"
+            android:textAlignment="gravity"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large.Inverse"/>
+    </FrameLayout>
+
+    <FrameLayout
         android:id="@+id/challenges_view"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_below="@id/offers_view"
         android:background="?attr/selectableItemBackground"
+        android:layout_below="@+id/offers_view"
         android:clickable="true"
-        android:gravity="center"
-        android:shadowColor="@android:color/black"
-        android:shadowDx="2"
-        android:shadowDy="2"
-        android:shadowRadius="4"
-        android:text="@string/challenges"
-        android:textAlignment="gravity"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large.Inverse"
-        app:layout_heightPercent="25%" />
+        app:layout_heightPercent="25%">
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_below="@id/challenges_view"
-        android:background="@android:color/holo_orange_dark"
-        app:layout_heightPercent="25%" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/holo_green_light"/>
 
-    <TextView
+        <TextView
+            android:id="@+id/challenges_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/challenges"
+            android:textAlignment="gravity"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large.Inverse"/>
+    </FrameLayout>
+
+    <FrameLayout
         android:id="@+id/rewards_view"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_below="@id/challenges_view"
         android:background="?attr/selectableItemBackground"
+        android:layout_below="@+id/challenges_view"
         android:clickable="true"
-        android:gravity="center"
-        android:shadowColor="@android:color/black"
-        android:shadowDx="2"
-        android:shadowDy="2"
-        android:shadowRadius="4"
-        android:text="@string/rewards"
-        android:textAlignment="gravity"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large.Inverse"
-        app:layout_heightPercent="25%" />
+        app:layout_heightPercent="25%">
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_below="@id/rewards_view"
-        android:background="@android:color/holo_red_light"
-        app:layout_heightPercent="25%" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/holo_orange_dark"/>
 
-    <TextView
+        <TextView
+            android:id="@+id/rewards_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/rewards"
+            android:textAlignment="gravity"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large.Inverse"/>
+    </FrameLayout>
+
+    <FrameLayout
         android:id="@+id/newsfeed_view"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_below="@id/rewards_view"
         android:background="?attr/selectableItemBackground"
+        android:layout_below="@+id/rewards_view"
         android:clickable="true"
-        android:gravity="center"
-        android:shadowColor="@android:color/black"
-        android:shadowDx="2"
-        android:shadowDy="2"
-        android:shadowRadius="4"
-        android:text="@string/newsfeed"
-        android:textAlignment="gravity"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large.Inverse"
-        app:layout_heightPercent="25%" />
+        app:layout_heightPercent="25%">
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/holo_red_light"/>
+
+        <TextView
+            android:id="@+id/newsfeed_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/newsfeed"
+            android:textAlignment="gravity"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large.Inverse"/>
+    </FrameLayout>
 </android.support.percent.PercentRelativeLayout>
