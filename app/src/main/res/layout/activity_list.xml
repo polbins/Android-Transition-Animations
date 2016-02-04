@@ -7,7 +7,7 @@
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
-        style="android:TextAppearance.Material.Title"
+        style="@style/AppTheme.Toolbar.TextView"
         android:layout_width="match_parent"
         android:layout_height="?android:attr/actionBarSize"
         android:background="@color/colorPrimary">
@@ -17,11 +17,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical|start"
-            android:shadowColor="@android:color/black"
-            android:shadowDx="2"
-            android:shadowDy="2"
-            android:shadowRadius="4"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large.Inverse"
+            style="@style/AppTheme.Toolbar.TextView"
+            android:text="Title"
             android:transitionName="@string/transition_list" />
 
     </android.support.v7.widget.Toolbar>
